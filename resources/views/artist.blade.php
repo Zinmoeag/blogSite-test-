@@ -19,7 +19,6 @@
 			<a href="/blogs/{{$blog->slug}}"><button>Read More</button></a>
 			<hr>
 		</div>
-
 		@endforeach
 	</section>
 </x-layout>

@@ -14,4 +14,24 @@ class Artist extends Model
     public function blog(){
         return $this->hasMany(Blog::class);
     }
+
+    public function scopeFilter($query){
+
+        $query->when(Request('artist-Blog') ?? false , function($query,$slug){
+
+            // $query->where("slug","LIKE",$slug)->blog;
+           
+          // dd(Artist::where()->blog);
+
+            $query->where("slug","LIKE",$slug);
+        });
+
+
+
+        
+        
+    }
+
+
+    
 }

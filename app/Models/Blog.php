@@ -16,4 +16,31 @@ class Blog extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+
+
+    public function scopeFilter($query,$filter){
+
+        // dd($filter);
+
+        //conditional query    
+        $query->when($filter["search"] ?? false , function($query , $search){
+            $query = $query
+                        ->where(function($query) use($search){
+                            $query
+                                ->where("title","LIKE","%"."$search"."%")
+                                ->orWhere("body","LIKE","%"."$search"."%");
+                        });
+        });
+
+
+        $query->when($filter["category"] ?? false, function($query, $slug){
+
+            $query->whereHas("category",function($query) use($slug){
+                $query
+                    ->where("slug","LIKE","$slug");
+            });
+        });
+
+    }
 }
