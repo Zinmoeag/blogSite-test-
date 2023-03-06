@@ -14,7 +14,7 @@ class AuthController extends Controller
             return view('register.create');
         }
 
-        public function getValue(){
+        public function store(){
             $userData = request()->validate([
                 "username"=>"required",
                 "email"=>["required","email",'unique:users,email'],
@@ -23,6 +23,8 @@ class AuthController extends Controller
                 "email.required" => "We need to know your Email",
                 "email.email" => "Invaild Email Address"
             ]);
+
+            $previousUrl = request('previousUrl');
 
 
             //input data
@@ -36,7 +38,7 @@ class AuthController extends Controller
 
 
             auth()->login($user);
-            return redirect("/")->with('created',"Hello ".auth()->user()->name.", You created account successfully");
+            return redirect()->intended($previousUrl)->with('created',"Hello ".auth()->user()->name.", You created account successfully");
         }
 
 
@@ -50,6 +52,9 @@ class AuthController extends Controller
                 "password"=>"required"
             ]);
 
+
+            $previousUrl = request('previousUrl');
+
             //CHECK EMAIL
             $user = User::where("email",request("email"))->first();
 
@@ -59,9 +64,17 @@ class AuthController extends Controller
 
                 if($passwordCheck){
                     auth()->login($user);
-                    return back();
+                    return redirect()->intended($previousUrl)->with('welcome-back',"Welcome Back ".auth()->user()->name);
                 }
             }
+        }
+
+
+        public function logout(){
+
+            auth()->logout();
+            return back();
+
         }
 
 }

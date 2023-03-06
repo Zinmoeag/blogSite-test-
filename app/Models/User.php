@@ -43,6 +43,16 @@ class User extends Authenticatable
     ];
 
 
+    public function subscribedBlogs(){
+        return $this->belongsToMany(Blog::class,"blog-user");
+    }
+
+    public function isSubscribed($blog){
+        return auth()->user()->subscribedBlogs && 
+                auth()->user()->subscribedBlogs->contains($blog->id);
+    }
+
+
     //mutator
 
     public function setPasswordAttribute($value){
@@ -55,5 +65,12 @@ class User extends Authenticatable
     public function getNameAttribute($value){
         return ucfirst($value);
     }
+
+    public function getImageAttribute($value){
+
+        return $value ? $value : "/assets/default_pic/default_user_pic.jpg" ;
+    }
+
+
 
 }

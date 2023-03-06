@@ -21,7 +21,9 @@ class BlogController extends Controller
     public function show(Blog $blog){
         return view("poem",[
             "blog"=>$blog,
-            "randomBlogs" =>Blog::inRandomOrder()->with(["category","artist"])->take(3)->get()
+            "randomBlogs" =>Blog::inRandomOrder()->with(["category","artist"])->take(3)->get(),
+            "comments"=>$blog->comment()->with("user")->latest()->paginate(5)
+
         ]);
     }
 }

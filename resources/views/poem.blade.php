@@ -2,7 +2,7 @@
 
 	<x-blogDisplayContent :blog="$blog" />
 
-    <x-comments-secton />
+    <x-comments-secton :comments="$comments" :blog="$blog" />
     
     <x-subcribe />
 

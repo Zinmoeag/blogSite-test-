@@ -10,13 +10,20 @@ class Blog extends Model
     use HasFactory;
 
     public function artist(){
-        return $this->belongsTo(Artist::class);
+        return $this->belongsTo(User::class,"artist_id");
     }
 
     public function category(){
         return $this->belongsTo(Category::class);
     }
 
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function subscribedUsers(){
+        return $this->belongsToMany(User::class,"blog-user");
+    }
 
 
     public function scopeFilter($query,$filter){
@@ -41,6 +48,8 @@ class Blog extends Model
                     ->where("slug","LIKE","$slug");
             });
         });
-
+        
     }
+
+
 }

@@ -8,12 +8,14 @@
 
       </h1>
       <div class="">
+
         <!-- blogDropdown  -->
         <x-category-dropdown />
 
+         <x-blogSeacher />
       </div> 
 
-    <x-blogSeacher />
+   
 
       <div class="row">
         @forelse($blogs as $blog)

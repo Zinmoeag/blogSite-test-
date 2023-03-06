@@ -9,18 +9,26 @@
           <a href="/#blogs" class="nav-link">Blogs</a>
           <a href="#subscribe" class="nav-link">Subscribe</a>
 
-          <!-- login -->
 
-          <a href="/register" class="nav-link">Register</a>
-          <a href="/login" class="nav-link">Login</a>
+          @if(auth()->check())
 
-
+          
           <form action="/logout" method="POST">
               @csrf
               <button type="submit" class="btn btn-link nav-link">
                   Logout
               </button>
           </form>
+
+
+          @else
+          <!-- login -->
+
+          <a href="/register" class="nav-link">Register</a>
+          <a href="/login" class="nav-link">Login</a>
+
+
+          @endif
 
         </div>
       </div>
