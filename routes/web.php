@@ -12,21 +12,14 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+
 use App\Mail\SubscriberMail;
 
 use App\Http\Middleware\Admin;
 
 
-
 Route::get('/',[BlogController::class,"index"]);
-
-// Route::get('/test',function(){
-// 	$users = User::take(4)->get();
-// 	$users->each(function($user){
-// 		Mail::to($user)->queue(new SubscriberMail($user));
-// 	});
-// 	return redirect("/");
-// });
 
 Route::get("/blogs/{blog:slug}",[BlogController::class,"show"]);
 
@@ -41,7 +34,16 @@ Route::get("/login",[AuthController::class,"index"])->middleware("guest");
 
 Route::post("/register",[AuthController::class,"store"]);
 Route::post("/login",[AuthController::class,"login"]);
-Route::post("/logout", [AuthController::class,"logout"]);
+Route::post("/logout", [AuthController::class,"logout"])->middleware("auth");
+
+Route::get("/password", [AuthController::class,"editPassword"]);
+
+Route::post("/password", [AuthController::class,"updatePassword"]);
+
+Route::get('/password/reset/{token}',[AuthController::class,"showResetPassword"]);
+
+Route::put('/password/reset',[AuthController::class,"updateResetPassword"]);
+
 
 
 //comment
@@ -50,17 +52,44 @@ Route::post("/blogs/{blog:slug}/comment",[CommentController::class,"store"]);
 
 
 //subscribe
-Route::post("/blogs/{blog:slug}/subscribe",[SubscriberController::class,"subscribeToggle"]);
+Route::post("/blogs/{blog:slug}/subscribe",[SubscribeController::class,"subscribeToggle"]);
+
+
+//profile
+
+Route::prefix('profile')->group(function () {
+
+	Route::get('/password',[ProfileController::class,"editPassword"]);
+
+	Route::put('/password',[ProfileController::class,"updatePassword"]);
+
+
+	Route::get("/{user}",[ProfileController::class,"index"]);
+
+
+	Route::post("/",[ProfileController::class,"picUpdate"])->middleware("auth");
+});
+
 
 
 //admin
 
-Route::get("/admin",[AdminController::class,"index"])->middleware(Admin::class);
+Route::middleware(Admin::class)->prefix("admin")->group(function(){
 
-Route::get("/admin/create",[AdminController::class,"create"])->middleware(Admin::class);
+	Route::get("/create",[AdminController::class,"create"]);
 
-Route::get("/admin/blogs",[AdminController::class,"adminBlog"])->middleware(Admin::class);
+	Route::get("/blogs",[AdminController::class,"adminBlog"]);
 
-Route::post("/admin/create",[AdminController::class,"store"])->middleware(Admin::class);
+	Route::post("/create",[AdminController::class,"store"]);
+
+	Route::delete("/blogs/{blog}",[AdminController::class,"destroy"]);
+
+	Route::get("/blogs/up/{blog}",[AdminController::class,"updatepage"]);
+
+	Route::put("/blogs/up/{blog}",[AdminController::class,"update"]);
+});
+
+
+
 
 

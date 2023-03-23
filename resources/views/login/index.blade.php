@@ -26,6 +26,13 @@
 				</div>
 				<x-errorMessage name="password" />
 
+
+				<a href="/password">Forgot password?</a>
+				<br>
+
+
+			
+
 				<button type="submit" class="btn btn-primary btn-sm mx-4 my-2">Submit</button>
 			</form>
 		</div>

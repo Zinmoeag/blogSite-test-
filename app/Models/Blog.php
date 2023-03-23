@@ -52,4 +52,10 @@ class Blog extends Model
     }
 
 
+    // ACCESSOR
+    public function getPhotoAttribute($value){
+        return $value ? "/storage/$value" : "https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg";
+    }
+
+
 }

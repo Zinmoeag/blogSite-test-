@@ -1,0 +1,1 @@
+<textarea cols="40" rows="6" class="form-control" id="summernote" placeholder="Enter Content" name="body">{{old('body')}}</textarea>

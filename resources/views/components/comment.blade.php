@@ -7,7 +7,10 @@
                     <div class="row">
                         <div class="d-flex align-items-center">
                             <div class="user-pic">
-                                <img src="{{$comment->user['image']}}" class="comment-pic" alt="hey">
+                                <a href="/profile/{{$comment->user->id}}">
+                                    <img src="{{$comment->user->image}}" class="comment-pic" alt="hey">
+                                </a>
+                                
                             </div>
 
                             <div class="user-info ms-4">

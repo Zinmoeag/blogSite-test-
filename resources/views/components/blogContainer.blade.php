@@ -1,6 +1,6 @@
 
  <!-- blogs section -->
-   @props(["blogs"])
+   @props(["blogs","action"=>""])
     <section class="container text-center" id="blogs">
       <h1 class="display-5 fw-bold mb-4">
 
@@ -10,9 +10,9 @@
       <div class="">
 
         <!-- blogDropdown  -->
-        <x-category-dropdown />
+        <x-category-dropdown action="{{$action}}" />
 
-         <x-blogSeacher />
+         <x-blogSeacher action="{{$action}}" />
       </div> 
 
    
@@ -30,6 +30,5 @@
 
         {{$blogs->links()}}
 
-      
       </div>
     </section>

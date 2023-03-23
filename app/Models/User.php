@@ -42,6 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function blogs(){
+        return $this->hasMany(Blog::class,"artist_id");
+    }
+
 
     public function subscribedBlogs(){
         return $this->belongsToMany(Blog::class,"blog-user");
@@ -68,9 +72,7 @@ class User extends Authenticatable
 
     public function getImageAttribute($value){
 
-        return $value ? $value : "/assets/default_pic/default_user_pic.jpg" ;
+        return $value ? "/storage/".$value : "/assets/default_pic/default_user_pic.jpg" ;
     }
-
-
 
 }

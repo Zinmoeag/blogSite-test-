@@ -1,33 +1,33 @@
 <x-adminLayout>
-    <table class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col" width="40px">Id</th>
-          <th scope="col" width="250px">Blog Title</th>
-          <th scope="col">Category</th>
-          <th scope="col">Artist</th>
-          <th scope="col" width="100px">Controlls</th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
 
-        @foreach($blogs as $blog)
-        <tr>
-          <th scope="row">{{$blog->id}}</th>
-          <td>{{$blog->title}}</td>
-          <td>{{$blog->category->name}}</td>
-          <td>{{$blog->artist->name}}</td>
-          <td>
-            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i></button>
-            <button type="submit" class="btn btn-sm btn-outline-dark"><i class="bi bi-pen"></i></button>
-          </td>
-        </tr>
-        @endforeach
+    <div class="row">
 
-      </tbody>
-    </table>
+        <div class="col-md-10">
+          <x-blogSeacher action="admin/blogs" />
+        </div>
 
-    {{$blogs->links()}}
+
+        <div class="col-md-2 my-3">
+           <form action="/admin/blogs" method="GET">
+
+            @if(request("sort")==="asc")
+             <button type="submit" class="btn btn-primary" name="sort" value="desc">Sort <i class="bi bi-arrow-down-up"></i></button>
+
+            @else
+             <button type="submit" class="btn btn-outline-primary" name="sort" value="asc">Sort <i class="bi bi-arrow-down-up"></i></button>
+            @endif
+
+
+            @if(request("search"))
+              <input type="hidden" value="{{request('search')}}" name="search">
+            @endif
+           </form>
+        </div>
+
+    </div>
+
+    <x-blogs-table :blogs="$blogs" />
+
 </x-adminLayout>
 
 

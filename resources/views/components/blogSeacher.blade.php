@@ -1,6 +1,6 @@
-
+  @props(["action"])
   <form 
-  action="/"
+  action="/{{$action}}"
   method="GET" 
   class="my-3">
         <div class="input-group mb-3">
@@ -15,6 +15,10 @@
 
           @if(request('category'))
              <input type="hidden" name="category" value="{{request('category')}}">
+          @endif
+
+          @if(request('sort'))
+              <input type="hidden" name="sort" value="{{request('sort')}}">
           @endif
 
          

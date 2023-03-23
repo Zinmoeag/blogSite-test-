@@ -1,6 +1,131 @@
+*{
+	transition: 0.2s all;
+}
 .comment-pic{
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 }
 
+.hide{
+	display: none;
+}
+.upload_img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30rem;
+	height: 15rem;
+	background: #d9d9d9;
+	border-radius: 20px;
+	border: 0.2rem dashed #535353;
+	position: relative;
+	overflow: hidden;
+}
+.upload_img .icon{
+	width: 5rem;
+	height: 5rem;
+	position: absolute;
+	z-index: 10;
+}
+
+.upload_img .prev-url{
+	position: absolute;
+	width: 100%;
+	
+}
+.uploaded_img{
+	position: relative;
+	cursor: pointer;
+	width: 30rem; height: 15rem;
+}
+.uploaded_img .cover{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex; align-items: center; justify-content: center;
+	color: white;
+	background: rgb(0,0,0,0.3);
+}
+
+.uploaded_img:hover .cover{
+	background: rgb(0,0,0,0.5);
+}
+
+.uploaded_img img{
+	width: 100%;
+	height: 100%;
+}
+
+.dark{
+	background: #8e8e83;	
+}
+
+.img-container{
+	display: flex;
+	align-items: center; justify-content: center;
+	height: 13rem; width: auto;
+	overflow: hidden;
+
+}
+
+.img-container img{
+
+	height: 100%; width: auto;
+}
+
+.profile-info{
+	display: flex;
+	border-radius: 1rem;
+	flex-direction: column;
+	width: 100%;
+	align-items: center; justify-content: center;
+	box-shadow: 2px 2px 5px 3px rgb(157, 157, 157, 0.5);
+	overflow: hidden;
+}
+
+
+.user-img{
+	margin: 2rem;
+	width: 10rem; height: 10rem;
+	margin-bottom: 1.5rem;
+	border-radius: 50%;
+	position: relative;
+
+}
+.user-img img{
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}
+
+.user-name{
+	width: 100%;
+	padding: 1rem 0;
+
+}
+
+.edit-user-img{
+	right: 1rem; bottom: 1rem;
+	position: absolute;
+	z-index: 10;
+	width: 2rem; height: 2rem;
+	display: flex; align-items: center; justify-content: center;
+	border-radius: 50%;
+}
+
+
+.name-edit-input{
+	width: 80%;
+	margin: auto;
+	border: none; outline: none;
+}
+
+.img-size{
+	width: 13rem; height: 13rem;
+}
+
+.user-pic-icon{
+	width: 2rem; height: 2rem;
+	border-radius: 50%;
+}

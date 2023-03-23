@@ -1,14 +1,15 @@
   <!--navbar -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark sticky-top">
       <div class="container">
         <a class="navbar-brand" href="/">Creative Coder</a>
         <div class="d-flex">
 
-          <a href="" class="nav-link text-light">{{auth()->user()?->name}}</a>
+
+         
+
+
           <a href="/" class="nav-link">Home</a>
           <a href="/#blogs" class="nav-link">Blogs</a>
-          <a href="#subscribe" class="nav-link">Subscribe</a>
-
 
           @if(auth()->check())
 
@@ -27,6 +28,15 @@
           <a href="/register" class="nav-link">Register</a>
           <a href="/login" class="nav-link">Login</a>
 
+
+          @endif
+
+
+          @if(auth()->check())
+
+            <a href="/profile/{{auth()->id()}}" class="nav-link text-light">
+              <img src="{{auth()->user()->image}}" alt="" class="user-pic-icon">
+            </a>
 
           @endif
 
